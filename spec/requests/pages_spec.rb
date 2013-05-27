@@ -8,6 +8,11 @@ describe "Static pages" do
       visit '/pages/home'
       expect(page).to have_content('Ledger')
     end
+
+    it "should have the title 'Home'" do
+      visit '/pages/home'
+      expect(page).to have_title("Ledger | Home")
+    end
   end
 
   describe "Help page" do
@@ -16,6 +21,11 @@ describe "Static pages" do
       visit '/pages/help'
       expect(page).to have_content('Help')
     end
+
+    it "should have the title 'Help'" do
+      visit '/pages/help'
+      expect(page).to have_title("Ledger | Help")
+    end
   end
 
   describe "About page" do
@@ -23,6 +33,11 @@ describe "Static pages" do
     it "should have the content 'About Ledger'" do
       visit '/pages/about'
       expect(page).to have_content('About Ledger')
+    end
+
+    it "should have the title 'About Us'" do
+      visit '/pages/about'
+      expect(page).to have_title("Ledger | About Us")
     end
   end
 end
