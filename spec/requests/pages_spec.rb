@@ -5,14 +5,14 @@ describe "Static pages" do
   let(:base_title) { "Ledger" }
 
   describe "Home page" do
-    before { visit '/pages/home' }
+    before { visit root_path }
 
     it "should have the content 'Ledger'" do
       expect(page).to have_content('Ledger')
     end
 
     it "should have the base title" do
-      expect(page).to have_title("Ledger")
+      expect(page).to have_title(base_title)
     end
 
     it "should not have a custom page title" do
@@ -21,7 +21,7 @@ describe "Static pages" do
   end
 
   describe "Help page" do
-    before { visit '/pages/help' }
+    before { visit help_path }
 
     it "should have the content 'Help'" do
       expect(page).to have_content('Help')
@@ -33,19 +33,19 @@ describe "Static pages" do
   end
 
   describe "About page" do
-    before { visit '/pages/about' }
+    before { visit about_path }
 
     it "should have the content 'About Ledger'" do
       expect(page).to have_content('About Ledger')
     end
 
-    it "should have the title 'About Us'" do
-      expect(page).to have_title("#{base_title} | About Us")
+    it "should have the title 'About'" do
+      expect(page).to have_title("#{base_title} | About")
     end
   end
 
   describe "Contact page" do
-    before { visit '/pages/contact' }
+    before { visit contact_path }
 
     it "should have the content 'Contact'" do
       expect(page).to have_content('Contact')
