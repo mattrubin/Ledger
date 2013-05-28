@@ -1,7 +1,10 @@
 development:
   adapter: postgresql
   host: localhost
-  database: ledger
+  database: ledger_development
+  encoding: utf8
+  pool: 5
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -10,9 +13,12 @@ test:
   adapter: postgresql
   host: localhost
   database: ledger_test
+  encoding: utf8
+  pool: 5
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  host: localhost
+  database: ledger
+  encoding: utf8
   pool: 5
-  timeout: 5000
