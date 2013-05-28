@@ -1,5 +1,8 @@
 Ledger::Application.routes.draw do
+  get "users/new"
+
   root 'pages#home'
+  get '/signup'  => 'users#new'
   get '/help'    => 'pages#help'
   get '/about'   => 'pages#about'
   get '/contact' => 'pages#contact'
