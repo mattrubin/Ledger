@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: "Example User", email: "user@example.com",
+    @user = User.new(name: "Example User", email: "user@example.com", username: "thisismylongusername",
                      password: "foobarbazqux", password_confirmation: "foobarbazqux")
   end
 
@@ -11,6 +11,7 @@ describe User do
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
+  it { should respond_to(:username) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
@@ -28,8 +29,18 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe "when username is not present" do
+    before { @user.username = " " }
+    it { should_not be_valid }
+  end
+
   describe "when name is too long" do
     before { @user.name = "a" * 51 }
+    it { should_not be_valid }
+  end
+
+  describe "when username is too long" do
+    before { @user.username = "a" * 21 }
     it { should_not be_valid }
   end
 
@@ -71,6 +82,46 @@ describe User do
       @user.email = mixed_case_email
       @user.save
       expect(@user.reload.email).to eq mixed_case_email.downcase
+    end
+  end
+
+  describe "when username format is invalid" do
+    it "should be invalid" do
+      usernames = %w[user@foo.com user\ name user-name]
+      usernames.each do |invalid_username|
+        @user.username = invalid_username
+        expect(@user).not_to be_valid
+      end      
+    end
+  end
+
+  describe "when username format is valid" do
+    it "should be valid" do
+      usernames = %w[username USER_NAME username123 0user1name2]
+      usernames.each do |valid_username|
+        @user.username = valid_username
+        expect(@user).to be_valid
+      end      
+    end
+  end
+
+  describe "when username address is already taken" do
+    before do
+      user_with_same_username = @user.dup
+      user_with_same_username.username = @user.username.upcase
+      user_with_same_username.save
+    end
+
+    it { should_not be_valid }
+  end
+
+  describe "username with mixed case" do
+    let(:mixed_case_username) { "UsErNaMe" }
+
+    it "should be saved as all lower-case" do
+      @user.username = mixed_case_username
+      @user.save
+      expect(@user.reload.username).to eq mixed_case_username.downcase
     end
   end
 
