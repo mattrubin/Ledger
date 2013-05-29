@@ -1,8 +1,13 @@
 Ledger::Application.routes.draw do
-  resources :users, :except => :new
+  resources :users, except: :new
+  resources :sessions, only: [:new, :create, :destroy]
 
   root 'pages#home'
+
   get '/signup'  => 'users#new'
+  get '/signin'  => 'sessions#new'
+  delete '/signout' => 'sessions#destroy'
+
   get '/help'    => 'pages#help'
   get '/about'   => 'pages#about'
   get '/contact' => 'pages#contact'
