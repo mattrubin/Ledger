@@ -1,5 +1,5 @@
 Ledger::Application.routes.draw do
-  get "users/new"
+  resources :users
 
   root 'pages#home'
   get '/signup'  => 'users#new'
