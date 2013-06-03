@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :signed_in_user, only: [:edit, :update]
 
   def show
     @user = User.find_by_username!(params[:id])
@@ -40,6 +41,12 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :username,
       	                           :password, :password_confirmation)
+    end
+
+    # Before filters
+
+    def signed_in_user
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
     end
 
 end
