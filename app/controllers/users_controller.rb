@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
+  before_action :new_user,       only: [:new, :create]
 
   def show
     @user = User.find_by_username!(params[:id])
@@ -54,6 +55,10 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find_by_username!(params[:id])
       redirect_to(root_path) unless current_user?(@user)
+    end
+
+    def new_user
+      redirect_to root_path if signed_in?
     end
 
 end

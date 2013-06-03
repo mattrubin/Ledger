@@ -96,6 +96,24 @@ describe "Authentication" do
       end
     end
 
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "in the Users controller" do
+        before { sign_in user }
+
+        describe "visiting the signup page" do
+          before { visit signup_path }
+        it { should_not have_title(full_title('Sign up')) }
+        end
+
+        describe "submitting to the create action" do
+          before { post users_path }
+          specify { expect(response).to redirect_to(root_path) }
+        end
+      end
+    end
+
   end
 
 end
