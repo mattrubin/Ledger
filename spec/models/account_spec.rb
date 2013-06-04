@@ -18,4 +18,14 @@ describe Account do
     before { @account.user_id = nil }
     it { should_not be_valid }
   end
+
+  describe "with blank name" do
+    before { @account.name = " " }
+    it { should_not be_valid }
+  end
+
+  describe "with name that is too long" do
+    before { @account.name = "a" * 101 }
+    it { should_not be_valid }
+  end
 end
