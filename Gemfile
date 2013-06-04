@@ -26,6 +26,8 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 
 gem 'bootstrap-sass', '2.3.1.0'
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

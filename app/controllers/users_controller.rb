@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_username!(params[:id])
+    @accounts = @user.accounts.paginate(page: params[:page], per_page: 10)
   end
 
   def new
