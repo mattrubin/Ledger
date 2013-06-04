@@ -128,4 +128,44 @@ describe "Authentication" do
 
   end
 
+  describe "user limit" do
+    before do
+      visit signup_path
+      fill_in "Name",             with: "Example User"
+      fill_in "Email",            with: "user@example.com"
+      fill_in "Username",         with: "superuser"
+      fill_in "Password",         with: "foobarbazqux"
+      fill_in "Confirm Password", with: "foobarbazqux"
+    end
+
+    let(:submit) { "Create my account" }
+
+    describe "for the first user" do
+      describe "visiting the signup page" do
+        it { should have_title(full_title('Sign up')) }
+      end
+
+      it "should create a user" do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
+    end
+
+    describe "for subsequent users" do
+      before do
+        click_button submit
+      end
+
+      describe "visiting the signup page" do
+        before { get signup_path }
+        specify { expect(response).to redirect_to(root_path) }
+      end
+
+      describe "submitting to the create action" do
+        before { post users_path }
+        specify { expect(response).to redirect_to(root_path) }
+      end
+    end
+
+  end
+
 end
