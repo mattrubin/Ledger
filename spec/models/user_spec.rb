@@ -199,5 +199,15 @@ describe User do
     it "should have the right accounts in the right order" do
       expect(@user.accounts.to_a).to eq [a_account, m_account, z_account]
     end
+
+    it "should destroy associated accounts" do
+      accounts = @user.accounts.to_a
+      @user.destroy
+      expect(accounts).not_to be_empty
+      accounts.each do |account|
+        expect(Account.where(id: account.id)).to be_empty
+      end
+    end
+
   end
 end
