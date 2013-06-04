@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :accounts
+
   before_save do
   	email.downcase!
   	username.downcase!

@@ -18,6 +18,8 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
 
+  it { should respond_to(:accounts) }
+
   it { should be_valid }
 
   describe "when name is not present" do
