@@ -6,4 +6,10 @@ FactoryGirl.define do
     password "foobarbazqux"
     password_confirmation "foobarbazqux"
   end
+
+  factory :account do
+    name "Savings Account"
+    user
+  end
+
 end

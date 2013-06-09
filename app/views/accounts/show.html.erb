@@ -1,0 +1,11 @@
+<% provide(:title, @account.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @account.name %>
+      </h1>
+      <%= link_to "Edit", edit_account_path(@account) %>
+    </section>
+  </aside>
+</div>

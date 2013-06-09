@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :new_user,       only: [:new, :create]
-  before_action :first_user,     only: [:new, :create]
+  before_action :require_signed_in_user, only: [:edit, :update]
+  before_action :require_correct_user,   only: [:edit, :update]
+  before_action :require_new_user,       only: [:new, :create]
+  before_action :require_first_user,     only: [:new, :create]
 
   def show
     @user = User.find_by_username!(params[:id])
+    @accounts = @user.accounts.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -46,23 +47,16 @@ class UsersController < ApplicationController
 
     # Before filters
 
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
-
-    def correct_user
+    def require_correct_user
       @user = User.find_by_username!(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
 
-    def new_user
+    def require_new_user
       redirect_to root_path if signed_in?
     end
 
-    def first_user
+    def require_first_user
       redirect_to root_path if User.any?
     end
 
