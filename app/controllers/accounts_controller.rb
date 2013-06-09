@@ -21,6 +21,7 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @transactions = @account.transactions.paginate(page: params[:page])
   end
 
   def edit

@@ -1,0 +1,6 @@
+<li class="transaction">
+  <h4 class="description"><%= transaction.description %></h4>
+  <span class="value">$<%= number_with_precision(transaction.value, :precision => 2) %></span>
+  @
+  <time datetime="<%= transaction.moment %>"><%= transaction.moment %></time>
+</li>
