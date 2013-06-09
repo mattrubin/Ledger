@@ -2,6 +2,7 @@
 <div class="row">
   <aside class="span4">
     <section>
+        <%= link_to "&laquo; ".html_safe+@account.user.name, @account.user %>
       <h1>
         <%= @account.name %>
       </h1>
@@ -11,6 +12,7 @@
   <div class="span8">
     <% if @account.transactions.any? %>
       <h3>Transactions (<%= @account.transactions.count %>)</h3>
+      <%= link_to "New", new_account_transaction_path(@account) %>
       <ol class="transactions">
         <%= render @transactions %>
       </ol>

@@ -1,7 +1,9 @@
 Ledger::Application.routes.draw do
   resources :users, except: :new
   resources :sessions, only: [:new, :create, :destroy]
-  resources :accounts
+  resources :accounts do
+    resources :transactions, except: [:index, :show]
+  end
 
   root 'pages#home'
 
