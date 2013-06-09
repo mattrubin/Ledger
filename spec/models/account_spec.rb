@@ -29,4 +29,29 @@ describe Account do
     before { @account.name = "a" * 101 }
     it { should_not be_valid }
   end
+
+  describe "transaction associations" do
+
+    before { @account.save }
+    let!(:first_transaction) do
+      FactoryGirl.create(:transaction, account: @account, description: "A", value: 22.22, created_at: 1.minute.ago)
+    end
+    let!(:second_transaction) do 
+      FactoryGirl.create(:transaction, account: @account, description: "C", value: 33.33, created_at: 1.hour.ago)
+    end
+    let!(:third_transaction) do 
+      FactoryGirl.create(:transaction, account: @account, description: "B", value: 11.11, created_at: 1.day.ago)
+    end
+
+    it "should destroy associated transactions" do
+      transactions = @account.transactions.to_a
+      @account.destroy
+      expect(transactions).not_to be_empty
+      transactions.each do |transaction|
+        expect(Transaction.where(id: transaction.id)).to be_empty
+      end
+    end
+
+  end
+
 end
