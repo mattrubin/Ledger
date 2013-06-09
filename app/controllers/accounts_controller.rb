@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
   before_action :require_signed_in_user
 
   def index
+    @accounts = current_user.accounts.paginate(page: params[:page], per_page: 10)
   end
 
   def new
