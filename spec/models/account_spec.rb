@@ -11,6 +11,7 @@ describe Account do
   it { should respond_to(:user_id) }
   it { should respond_to(:user) }
   its(:user) { should eq user }
+  it { should respond_to(:transactions) }
 
   it { should be_valid }
 
