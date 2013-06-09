@@ -19,4 +19,19 @@ describe Transaction do
     before { @transaction.account_id = nil }
     it { should_not be_valid }
   end
+
+  describe "with empty value" do
+    before { @transaction.value = nil }
+    it { should_not be_valid }
+  end
+
+  describe "with blank description" do
+    before { @transaction.description = " " }
+    it { should_not be_valid }
+  end
+
+  describe "with description that is too long" do
+    before { @transaction.description = "a" * 101 }
+    it { should_not be_valid }
+  end
 end
