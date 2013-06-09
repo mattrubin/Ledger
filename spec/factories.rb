@@ -15,6 +15,7 @@ FactoryGirl.define do
   factory :transaction do
     description "Coffee"
     value 11.11
+    moment 1.day.ago
     account
   end
 

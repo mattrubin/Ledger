@@ -34,13 +34,17 @@ describe Account do
 
     before { @account.save }
     let!(:first_transaction) do
-      FactoryGirl.create(:transaction, account: @account, description: "A", value: 22.22, created_at: 1.minute.ago)
+      FactoryGirl.create(:transaction, account: @account, description: "A", value: 22.22, moment: 2.hours.ago, created_at: 1.minute.ago)
     end
     let!(:second_transaction) do 
-      FactoryGirl.create(:transaction, account: @account, description: "C", value: 33.33, created_at: 1.hour.ago)
+      FactoryGirl.create(:transaction, account: @account, description: "C", value: 33.33, moment: 2.days.ago, created_at: 1.hour.ago)
     end
     let!(:third_transaction) do 
-      FactoryGirl.create(:transaction, account: @account, description: "B", value: 11.11, created_at: 1.day.ago)
+      FactoryGirl.create(:transaction, account: @account, description: "B", value: 11.11, moment: 2.minutes.ago, created_at: 1.day.ago)
+    end
+
+    it "should have the right transactions in the right order" do
+      expect(@account.transactions.to_a).to eq [third_transaction, first_transaction, second_transaction]
     end
 
     it "should destroy associated transactions" do
