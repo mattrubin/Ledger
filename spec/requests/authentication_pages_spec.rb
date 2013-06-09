@@ -90,6 +90,45 @@ describe "Authentication" do
           specify { expect(response).to redirect_to(signin_path) }
         end
       end
+
+      describe "in the Accounts controller" do
+
+        describe "visiting the index page" do
+          before { visit accounts_path }
+          it { should have_title('Sign in') }
+        end
+
+        describe "visiting the new page" do
+          before { visit new_account_path }
+          it { should have_title('Sign in') }
+        end
+
+        describe "submitting to the create action" do
+          before { post accounts_path }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "visiting the show page" do
+          before { visit account_path(FactoryGirl.create(:account)) }
+          it { should have_title('Sign in') }
+        end
+
+        describe "visiting the edit page" do
+          before { visit edit_account_path(user) }
+          it { should have_title('Sign in') }
+        end
+
+        describe "submitting to the update action" do
+          before { patch account_path(FactoryGirl.create(:account)) }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete account_path(FactoryGirl.create(:account)) }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+      end
+
     end
 
     describe "as wrong user" do
