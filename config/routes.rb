@@ -1,7 +1,7 @@
 Ledger::Application.routes.draw do
   resources :users, except: :new
   resources :sessions, only: [:new, :create, :destroy]
-  resources :accounts do
+  resources :accounts, except: :index do
     resources :transactions, except: [:index, :show]
   end
 

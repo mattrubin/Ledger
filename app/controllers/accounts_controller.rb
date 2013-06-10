@@ -2,12 +2,8 @@ class AccountsController < ApplicationController
   before_action :require_signed_in_user
   before_action :require_correct_user, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @accounts = current_user.accounts.paginate(page: params[:page], per_page: 10)
-  end
-
   def new
-	@account = current_user.accounts.build
+    @account = current_user.accounts.build
   end
 
   def create

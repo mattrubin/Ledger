@@ -36,10 +36,10 @@ describe Account do
     let!(:first_transaction) do
       FactoryGirl.create(:transaction, account: @account, description: "A", value: 22.22, moment: 2.hours.ago, created_at: 1.minute.ago)
     end
-    let!(:second_transaction) do 
+    let!(:second_transaction) do
       FactoryGirl.create(:transaction, account: @account, description: "C", value: 33.33, moment: 2.days.ago, created_at: 1.hour.ago)
     end
-    let!(:third_transaction) do 
+    let!(:third_transaction) do
       FactoryGirl.create(:transaction, account: @account, description: "B", value: 11.11, moment: 2.minutes.ago, created_at: 1.day.ago)
     end
 

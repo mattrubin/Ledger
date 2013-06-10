@@ -72,7 +72,7 @@ describe "Authentication" do
             end
 
             it "should render the default (profile) page" do
-              expect(page).to have_title(user.name) 
+              expect(page).to have_title(user.name)
             end
           end
         end
