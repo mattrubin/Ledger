@@ -12,4 +12,11 @@ FactoryGirl.define do
     user
   end
 
+  factory :transaction do
+    description "Coffee"
+    value 11.11
+    moment 1.day.ago
+    account
+  end
+
 end

@@ -1,0 +1,6 @@
+<li class="transaction">
+  <span class="edit"><%= link_to "Edit", edit_account_transaction_path(transaction.account, transaction) %></span>
+  <h4 class="description"><%= transaction.description %></h4>
+  <%= time_tag transaction.moment %>
+  <div class="value"><%= number_to_currency transaction.value %></div>
+</li>
