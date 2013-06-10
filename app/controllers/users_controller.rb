@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_signed_in_user, only: [:edit, :update]
+  before_action :require_signed_in_user, except: [:new, :create]
   before_action :require_correct_user,   only: [:edit, :update]
   before_action :require_new_user,       only: [:new, :create]
   before_action :require_first_user,     only: [:new, :create]
