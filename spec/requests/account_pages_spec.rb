@@ -25,7 +25,7 @@ describe "Account pages" do
 
       describe "error messages" do
         before { click_button "Create" }
-        it { should have_content('error') } 
+        it { should have_content('error') }
       end
     end
 

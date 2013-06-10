@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   has_many :accounts, dependent: :destroy
 
   before_save do
-  	email.downcase!
-  	username.downcase!
+    email.downcase!
+    username.downcase!
   end
   before_save :create_remember_token
 

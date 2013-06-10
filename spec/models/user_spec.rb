@@ -54,7 +54,7 @@ describe User do
       addresses.each do |invalid_address|
         @user.email = invalid_address
         expect(@user).not_to be_valid
-      end      
+      end
     end
   end
 
@@ -64,7 +64,7 @@ describe User do
       addresses.each do |valid_address|
         @user.email = valid_address
         expect(@user).to be_valid
-      end      
+      end
     end
   end
 
@@ -94,7 +94,7 @@ describe User do
       usernames.each do |invalid_username|
         @user.username = invalid_username
         expect(@user).not_to be_valid
-      end      
+      end
     end
   end
 
@@ -104,7 +104,7 @@ describe User do
       usernames.each do |valid_username|
         @user.username = valid_username
         expect(@user).to be_valid
-      end      
+      end
     end
   end
 
@@ -130,7 +130,7 @@ describe User do
 
   describe "when password is not present" do
     before do
-      @user = User.new(name: "Example User", email: "user@example.com", 
+      @user = User.new(name: "Example User", email: "user@example.com",
                        password: " ", password_confirmation: " ")
     end
     it { should_not be_valid }
@@ -189,10 +189,10 @@ describe User do
     let!(:a_account) do
       FactoryGirl.create(:account, user: @user, name: "alpha", created_at: 1.day.ago)
     end
-    let!(:z_account) do 
+    let!(:z_account) do
       FactoryGirl.create(:account, user: @user, name: "Zeta", created_at: 1.hour.ago)
     end
-    let!(:m_account) do 
+    let!(:m_account) do
       FactoryGirl.create(:account, user: @user, name: "mu", created_at: 1.minute.ago)
     end
 

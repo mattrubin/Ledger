@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :username,
-      	                           :password, :password_confirmation)
+                                   :password, :password_confirmation)
     end
 
     # Before filters
