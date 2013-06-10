@@ -16,6 +16,20 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def edit
+    @transaction = @account.transactions.find(params[:id])
+  end
+
+  def update
+    @transaction = @account.transactions.find(params[:id])
+    if @transaction.update_attributes(transaction_params)
+      flash[:success] = "Transaction updated"
+      redirect_to @account
+    else
+      render 'edit'
+    end
+  end
+
   private
 
     def transaction_params

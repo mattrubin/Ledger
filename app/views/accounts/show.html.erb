@@ -17,6 +17,8 @@
         <%= render @transactions %>
       </ol>
       <%= will_paginate @transactions %>
+    <% else %>
+      <h4><%= link_to "Add a transaction", new_account_transaction_path(@account) %></h4>
     <% end %>
   </div>
 </div>
