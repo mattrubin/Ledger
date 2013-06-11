@@ -93,11 +93,6 @@ describe "Authentication" do
 
       describe "in the Accounts controller" do
 
-        describe "visiting the index page" do
-          before { visit accounts_path }
-          it { should have_title('Sign in') }
-        end
-
         describe "visiting the new page" do
           before { visit new_account_path }
           it { should have_title('Sign in') }
