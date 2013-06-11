@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
     end
 
     def require_correct_user
-      @account = Account.find(params[:account_id])
+      @account = Account.find_by_slug!(params[:account_id])
       redirect_to(root_path) unless current_user?(@account.user)
     end
 
