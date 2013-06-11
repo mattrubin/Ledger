@@ -187,13 +187,13 @@ describe User do
 
     before { @user.save }
     let!(:a_account) do
-      FactoryGirl.create(:account, user: @user, name: "alpha", created_at: 1.day.ago)
+      FactoryGirl.create(:account, user: @user, name: "alpha", slug: "alpha", created_at: 1.day.ago)
     end
     let!(:z_account) do
-      FactoryGirl.create(:account, user: @user, name: "Zeta", created_at: 1.hour.ago)
+      FactoryGirl.create(:account, user: @user, name: "Zeta", slug: "zeta", created_at: 1.hour.ago)
     end
     let!(:m_account) do
-      FactoryGirl.create(:account, user: @user, name: "mu", created_at: 1.minute.ago)
+      FactoryGirl.create(:account, user: @user, name: "mu", slug: "mu", created_at: 1.minute.ago)
     end
 
     it "should have the right accounts in the right order" do

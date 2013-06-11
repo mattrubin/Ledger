@@ -30,7 +30,10 @@ describe "Account pages" do
     end
 
     describe "with valid information" do
-      before { fill_in 'account_name', with: "Savings" }
+      before do
+        fill_in 'account_name', with: "Savings"
+        fill_in 'account_slug', with: "savings"
+      end
 
       it "should create an account for the current user" do
         expect { click_button "Create" }.to change(user.accounts, :count).by(1)

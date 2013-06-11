@@ -13,8 +13,8 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    let!(:a1) { FactoryGirl.create(:account, user: user, name: "Savings") }
-    let!(:a2) { FactoryGirl.create(:account, user: user, name: "Checking") }
+    let!(:a1) { FactoryGirl.create(:account, user: user, name: "Savings", slug: "savings") }
+    let!(:a2) { FactoryGirl.create(:account, user: user, name: "Checking", slug: "checking") }
 
     before do
       sign_in user

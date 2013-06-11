@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Account do
   let(:user) { FactoryGirl.create(:user) }
 
-  before { @account = user.accounts.build(name: "Savings Account") }
+  before { @account = user.accounts.build(name: "Savings Account", slug: "savings") }
 
   subject { @account }
 
@@ -12,6 +12,7 @@ describe Account do
   it { should respond_to(:user) }
   its(:user) { should eq user }
   it { should respond_to(:transactions) }
+  it { should respond_to(:slug) }
 
   it { should be_valid }
 
@@ -28,6 +29,56 @@ describe Account do
   describe "with name that is too long" do
     before { @account.name = "a" * 101 }
     it { should_not be_valid }
+  end
+
+  describe "when slug is not present" do
+    before { @account.slug = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when slug is too long" do
+    before { @account.slug = "a" * 51 }
+    it { should_not be_valid }
+  end
+
+  describe "when slug format is invalid" do
+    it "should be invalid" do
+      slugs = %w[Savings&Checking my\ account]
+      slugs.each do |invalid_slug|
+        @account.slug = invalid_slug
+        expect(@account).not_to be_valid
+      end
+    end
+  end
+
+  describe "when slug format is valid" do
+    it "should be valid" do
+      slugs = %w[account MY_ACCOUNT account123 my-account]
+      slugs.each do |valid_slug|
+        @account.slug = valid_slug
+        expect(@account).to be_valid
+      end
+    end
+  end
+
+  describe "when slug is already taken" do
+    before do
+      account_with_same_slug = @account.dup
+      account_with_same_slug.slug = @account.slug.upcase
+      account_with_same_slug.save
+    end
+
+    it { should_not be_valid }
+  end
+
+  describe "account with mixed case" do
+    let(:mixed_case_slug) { "AcCoUnT" }
+
+    it "should be saved as all lower-case" do
+      @account.slug = mixed_case_slug
+      @account.save
+      expect(@account.reload.slug).to eq mixed_case_slug.downcase
+    end
   end
 
   describe "transaction associations" do
