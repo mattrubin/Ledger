@@ -16,7 +16,10 @@ describe "User pages" do
     let!(:a1) { FactoryGirl.create(:account, user: user, name: "Savings") }
     let!(:a2) { FactoryGirl.create(:account, user: user, name: "Checking") }
 
-    before { visit user_path(user) }
+    before do
+      sign_in user
+      visit user_path(user)
+    end
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
