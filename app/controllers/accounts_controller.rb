@@ -38,11 +38,11 @@ class AccountsController < ApplicationController
   private
 
     def account_params
-      params.require(:account).permit(:name)
+      params.require(:account).permit(:name, :slug)
     end
 
     def require_correct_user
-      @account = Account.find(params[:id])
+      @account = Account.find_by_slug!(params[:id])
       redirect_to(root_path) unless current_user?(@account.user)
     end
 

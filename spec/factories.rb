@@ -9,6 +9,7 @@ FactoryGirl.define do
 
   factory :account do
     name "Savings Account"
+    slug "savings"
     user
   end
 
