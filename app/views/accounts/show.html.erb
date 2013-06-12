@@ -11,7 +11,7 @@
   </aside>
   <div class="span8">
     <% if @account.transactions.any? %>
-      <h3>Transactions (<%= @account.transactions.count %>)</h3>
+      <h3>Transactions <small>(<%= @account.transactions.count %>)</small></h3>
       <%= link_to "New", new_account_transaction_path(@account) %>
       <ol class="transactions">
         <%= render @transactions %>

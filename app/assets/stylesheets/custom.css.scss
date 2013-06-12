@@ -18,6 +18,7 @@ html {
 
 body {
   padding-top: 60px;
+  font-weight: 200;
 }
 
 section {
@@ -40,27 +41,35 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+  font-weight: inherit;
+  small {
+    font-weight: inherit;
+    font-size: 70%;
+  }
 }
 
 h1 {
   font-size: 3em;
-  letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
 }
 
 h2 {
   font-size: 1.2em;
-  letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
-  font-weight: normal;
   color: $grayLight;
 }
 
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+label, input, button, select, textarea,
+.dropdown-menu > li > a
+{
+  font-weight: inherit;
 }
 
 
@@ -70,16 +79,24 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
+  color: $navbarLinkColorHover;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: .1em;
   padding-top: 9px;
-  font-weight: bold;
   line-height: 1;
   &:hover {
-    color: white;
     text-decoration: none;
   }
+}
+
+.hero-unit {
+  h1 {
+    text-transform: uppercase;
+  }
+}
+
+.navbar-inner {
+  background: rgba(250, 250, 250, 0.75);
 }
 
 
@@ -139,7 +156,6 @@ aside {
     h1 {
       font-size: 1.4em;
       text-align: left;
-      letter-spacing: -1px;
       margin-bottom: 3px;
       margin-top: 0px;
     }
@@ -149,6 +165,7 @@ aside {
 .gravatar {
   float: left;
   margin-right: 10px;
+  border-radius: 50%;
 }
 
 
